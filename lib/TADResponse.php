@@ -187,7 +187,7 @@ class TADResponse
      */
     public function to_json()
     {
-        return $this->is_empty_response() ? '{}' : json_encode(simplexml_load_string(utf8_encode((string) $this)));
+        return $this->is_empty_response() ? '{}' : json_encode(simplexml_load_string((string) $this));
     }
 
     /**
@@ -402,6 +402,7 @@ class TADResponse
      */
     private function sanitize_xml_string($xml, array $undesired_chars = [ "\n", "\r", "\t" ])
     {
+        $xml = utf8_encode($xml);
         return trim(str_replace($undesired_chars, '', $xml));
     }
 
